@@ -28,10 +28,10 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id})({self.__dict__})"
 
 # %Y-%m-%dT%H:%M:%S.%f
-id = BaseModel()
-id2 = BaseModel()
-print(id.created_at)
-print(id.updated_at)
-id.save()
+# id = BaseModel()
+# id2 = BaseModel()
+# print(id.created_at)
+# print(id.updated_at)
+# id.save()
 
-print(id.updated_at)
+# print(id.updated_at)
