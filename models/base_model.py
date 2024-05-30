@@ -10,7 +10,7 @@ import time
 class BaseModel:
     def __init__(self):
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.now().isoformat()
+        self.created_at = datetime.now()
         # self.created_at = datetime.strptime(f"{self.created_at}", "%Y-%m-%dT%H:%M:%S.%f")
         self.updated_at = self.created_at
 
