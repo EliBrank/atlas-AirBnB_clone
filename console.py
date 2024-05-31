@@ -1,4 +1,6 @@
+#!/usr/bin/python3
 import sys, cmd
+"""This is the console command"""
 
 
 class HBNBCommand(cmd.Cmd):
