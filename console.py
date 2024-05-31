@@ -16,5 +16,9 @@ class HBNBCommand(cmd.Cmd):
         print()
         exit()
 
+    def emptyline(self):
+        """Does nothing"""
+        pass
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
