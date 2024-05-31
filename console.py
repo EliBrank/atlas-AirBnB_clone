@@ -3,10 +3,9 @@
 import sys, cmd
 
 
-
 class HBNBCommand(cmd.Cmd):
     """Command or Console"""
-    prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
+    prompt = '(hbnb) '
 
     def do_quit(self, command):
         """Quitter"""
