@@ -25,7 +25,7 @@ class BaseModel:
         return attr_dict
 
     def __str__(self):
-        return f"[{self.__class__.__name__}] ({self.id})({self.__dict__})"
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
 # %Y-%m-%dT%H:%M:%S.%f
 # id = BaseModel()
