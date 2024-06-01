@@ -7,7 +7,7 @@ class HBNBCommand(cmd.Cmd):
     """Command or Console"""
     prompt = '(hbnb) '
 
-     def preloop(self):
+    def preloop(self):
         """Prints if isatty is false"""
         if not sys.__stdin__.isatty():
             print('(hbnb)')
