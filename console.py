@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """This is the console command"""
 import sys, cmd
+from models.base_model import BaseModel
+from models.__init__ import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -33,21 +35,43 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ A Doozy"""
-        # If the class name is missing, print ** class name missing ** (ex: $ create)
         if not args:
             print("** class name missing **")
             return
 
-        args_len =  args_len.split()
-
+        args_len = args.split()
         class_name = args_len[0]
-
-        # If the class name doesn’t exist, print ** class doesn't exist ** (ex: $ create MyModel)
-        if class_name not in HBNBCommand():
-            print("** class doesnt exist**")
+        #is class in HBNBcommand?
+        if class_name not in HBNBCommand:
+            print("** Class doesnt exist **")
             return
 
-        args_len =  args_len[1:]
+        args_len = args_len[:1]
+
+        attributes = {}
+        #Searsch through the list of arguements
+        for arg in args_len:
+            key, value = arg.split("=")
+            #Unquote, underscore to space
+            if value.startswith('"') and value.endswith('"'):
+                value = value[1:-1].replace('_',' ')
+                #convert values to appropriate data types
+                try:
+                    value = float(value)
+                except ValueError:
+                    try:
+                        value = int(value)
+                    except ValueError:
+                        pass
+                attributes[key] = value
+
+        new_instance = HBNBCommand.classes[class_name](**attributes)
+
+        #save call
+        storage.new(new_instance)
+        storage.save()
+
+        print(new_instance.id)
 
     def do_show(self, args):
         """Shows"""
