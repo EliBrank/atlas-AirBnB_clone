@@ -4,6 +4,7 @@
 
 from datetime import datetime, date, time
 import uuid
+storage = __import__('engine/file_storage').FileStorage
 
 
 class BaseModel:
@@ -28,10 +29,12 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
+            storage.new(self)
 
     def save(self):
         """sets updated_at attribute to current time"""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """creates dictionary representation of BaseModel
