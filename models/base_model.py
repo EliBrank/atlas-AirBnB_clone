@@ -11,20 +11,15 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """initializes BaseModel with unique id and creation date"""
 
-        if kwargs is not None:
+        if kwargs:
 
-            # If created_at or updated_at are in kwargs,
-            # they will be overwritten with datetime format
-            kwargs["created_at"] = datetime.strptime(
-                kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f"
-            )
-            kwargs["updated_at"] = datetime.strptime(
-                kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f"
-            )
-
-            # loop through user input for any other key/value pairs
-            # initialize anything entered except for __class__
             for key, value in kwargs.items():
+                # If created_at or updated_at are in kwargs,
+                # they will be overwritten with datetime format
+                if key == "created_at" or key == "updated_at":
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                # loop through user input for any other key/value pairs
+                # initialize anything entered except for __class__
                 if key != "__class__":
                     setattr(self, key, value)
 
