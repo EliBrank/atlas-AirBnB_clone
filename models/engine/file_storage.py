@@ -2,8 +2,9 @@
 
 """This module defines a class named FileStorage"""
 
-import json, models
+import json
 from os.path import exists
+import models
 
 
 class FileStorage():
@@ -25,18 +26,14 @@ class FileStorage():
         self.__objects.update({f"{obj.__class__.__name__}.{obj.id}" : obj})
 
     def save(self):
-        """saves each object in __objects to JSON file
+        """saves each object in __objects to JSON file"""
 
-        Args:
-            __objects: python objects to be converted and saved
-        """
-
-        from models.base_model import BaseModel
-        json_list = []
+        json_dict = {}
         with open(self.__file_path, "w") as f:
-            for obj in self.__objects:
-                json_list.append(obj.to_dict())
-            json.dump(json_list, f)
+            for key, value in self.__objects.items():
+                json_dict.update({f"{key}" : value.to_dict()})
+
+            json.dump(json_dict, f)
 
     def reload(self):
         """reloads __objects dictionary with objects from JSON file"""
