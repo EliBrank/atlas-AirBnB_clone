@@ -4,7 +4,6 @@
 
 import json, models
 from os.path import exists
-from models.base_model import BaseModel
 
 
 class FileStorage():
@@ -14,7 +13,7 @@ class FileStorage():
 
     def all(self):
         """returns the dictionary __objects"""
-        return FileStorage.__objects
+        return self.__objects
 
     def new(self, obj):
         """saves obj to __objects with object's class and unique id as key
@@ -23,7 +22,7 @@ class FileStorage():
             obj: python object to add to dictionary
         """
 
-        FileStorage.__objects.update({f"{obj.__class__.__name__}.{obj.id}" : obj})
+        self.__objects.update({f"{obj.__class__.__name__}.{obj.id}" : obj})
 
     def save(self):
         """saves each object in __objects to JSON file
@@ -32,15 +31,16 @@ class FileStorage():
             __objects: python objects to be converted and saved
         """
 
+        from models.base_model import BaseModel
         json_list = []
-        with open(FileStorage.__file_path, "w") as f:
-            for obj in FileStorage.__objects:
+        with open(self.__file_path, "w") as f:
+            for obj in self.__objects:
                 json_list.append(obj.to_dict())
             json.dump(json_list, f)
 
     def reload(self):
         """reloads __objects dictionary with objects from JSON file"""
 
-        if exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path, "r") as f:
-                FileStorage.__objects = json.load(f)
+        if exists(self.__file_path):
+            with open(self.__file_path, "r") as f:
+                self.__objects = json.load(f)

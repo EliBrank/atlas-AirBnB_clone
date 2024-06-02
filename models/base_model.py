@@ -4,7 +4,7 @@
 
 from datetime import datetime, date, time
 import uuid
-storage = __import__('engine/file_storage').FileStorage
+from models import storage
 
 
 class BaseModel:
