@@ -59,7 +59,7 @@ class BaseModel:
                 attr_dict.update({key : value.isoformat()})
             else:
                 attr_dict.update({key : value})
-        # attr_dict = {attr: getattr(self, attr) for attr in self.__dict__}
+
         return attr_dict
 
     def __str__(self):
