@@ -68,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
         class_name = args_len[0]
         #is class in HBNBcommand?
         if class_name not in HBNBCommand.classes:
-            print("** Class doesnt exist **")
+            print("** class doesnt exist **")
             return
 
         args_len = args_len[:1]
