@@ -20,14 +20,9 @@ class User(models.BaseModel):
 
         super().__init__()
 
-        if email != "":
-            self.email = email
-
-        if password != "":
-            self.password = password
-
-        if first_name != "":
-            self.first_name = first_name
+        self.email = email
+        self.password = password
+        self.first_name = first_name
 
         if last_name != "":
             self.last_name = last_name
