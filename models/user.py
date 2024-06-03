@@ -7,8 +7,8 @@ import models
 
 class User(models.BaseModel):
     """defines User based on BaseModel"""
-    def __init__(self, email=None, password=None, first_name=None,
-                last_name=None, *args, **kwargs):
+    def __init__(self, email="", password="", first_name="",
+                last_name="", *args, **kwargs):
         """initializes User
 
         Args:
@@ -20,14 +20,14 @@ class User(models.BaseModel):
 
         super().__init__()
 
-        if email is not None:
+        if email != "":
             self.email = email
 
-        if password is not None:
+        if password != "":
             self.password = password
 
-        if first_name is not None:
+        if first_name != "":
             self.first_name = first_name
 
-        if last_name is not None:
+        if last_name != "":
             self.last_name = last_name
