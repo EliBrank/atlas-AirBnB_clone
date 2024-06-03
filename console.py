@@ -37,8 +37,24 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_all(self, args):
+        print_list = []
+        class_name = args.split(' ')[0] if ' ' in args else args
+
         if class_name not in HBNBCommand.classes:
             print("** class name doesnt exist **")
+            return
+
+        for key, value in storage._FileStorage__objects.items():
+            if class_name in key:
+               print_list.append(str(value))
+
+            if not print_list:
+                print("** class doesnt exist **")
+                return
+
+            else:
+                for item in print_list:
+                    print(item)
 
 
 
