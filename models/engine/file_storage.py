@@ -38,17 +38,12 @@ class FileStorage():
     def reload(self):
         """reloads __objects dictionary with objects from JSON file"""
 
-        class_dict = {
-            "BaseModel" : models.BaseModel,
-            "User" : models.User,
-        }
-
         if exists(self.__file_path):
             with open(self.__file_path, "r") as f:
                 obj_dict = json.load(f)
                 for key, value in obj_dict.items():
                     # separate class name from key
                     class_name = key.split(".")[0]
-                    if class_name in class_dict:
-                        class_name = class_dict[class_name]
+                    if class_name in models.class_dict:
+                        class_name = models.class_dict[class_name]
                         self.__objects[key] = class_name(**value)
