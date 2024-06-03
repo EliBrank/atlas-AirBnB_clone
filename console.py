@@ -41,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
         class_name = args.split(' ')[0] if ' ' in args else args
 
         if class_name not in HBNBCommand.classes:
-            print("** class name doesnt exist **")
+            print("** class name doesn't exist **")
             return
 
         for key, value in storage._FileStorage__objects.items():
@@ -49,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
                print_list.append(str(value))
 
             if not print_list:
-                print("** class doesnt exist **")
+                print("** class doesn't exist **")
                 return
 
             else:
@@ -68,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
         class_name = args_len[0]
         #is class in HBNBcommand?
         if class_name not in HBNBCommand.classes:
-            print("** class doesnt exist **")
+            print("** class doesn't exist **")
             return
 
         args_len = args_len[:1]
