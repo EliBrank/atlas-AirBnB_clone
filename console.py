@@ -87,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
         print(new_instance.id)
 
     def do_show(self, args):
-        """Shows"""
+        """displays """
         pass
 
     def do_destroy(self, args):
