@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """This is the console command"""
-import sys, cmd
+import sys, cmd, models
 from models.base_model import BaseModel
 from models import storage
 
@@ -8,9 +8,6 @@ from models import storage
 class HBNBCommand(cmd.Cmd):
     """Command or Console"""
     prompt = '(hbnb) '
-    classes = {
-        'BaseModel' : BaseModel
-    }
 
     def preloop(self):
         """Prints if isatty is false"""
@@ -40,7 +37,7 @@ class HBNBCommand(cmd.Cmd):
         print_list = []
         class_name = args.split(' ')[0] if ' ' in args else args
 
-        if class_name not in HBNBCommand.classes:
+        if class_name not in models.class_dict:
             print("** class name doesn't exist **")
             return
 
@@ -67,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
         args_len = args.split()
         class_name = args_len[0]
         #is class in HBNBcommand?
-        if class_name not in HBNBCommand.classes:
+        if class_name not in models.class_dict:
             print("** class doesn't exist **")
             return
 
@@ -94,7 +91,7 @@ class HBNBCommand(cmd.Cmd):
                         pass
             attributes[key] = value
 
-        new_instance = HBNBCommand.classes[class_name](**attributes)
+        new_instance = models.class_dict[class_name](**attributes)
 
         #save call
         storage.new(new_instance)
@@ -114,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        if c_name not in HBNBCommand.classes:
+        if c_name not in models.class_dict:
             print("** class doesn't exist **")
             return
 
@@ -141,7 +138,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        if c_name not in HBNBCommand.classes:
+        if c_name not in models.class_dict:
             print("** class doesn't exist **")
             return
 
