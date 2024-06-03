@@ -38,7 +38,10 @@ class FileStorage():
     def reload(self):
         """reloads __objects dictionary with objects from JSON file"""
 
-        class_dict = {"BaseModel" : models.BaseModel,}
+        class_dict = {
+            "BaseModel" : models.BaseModel,
+            "User" : models.User,
+        }
 
         if exists(self.__file_path):
             with open(self.__file_path, "r") as f:

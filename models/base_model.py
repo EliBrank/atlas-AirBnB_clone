@@ -8,7 +8,7 @@ import models
 
 
 class BaseModel:
-    """base class for city, place, etc."""
+    """base class for user, city, place, etc."""
     def __init__(self, *args, **kwargs):
         """initializes BaseModel with unique id and creation date"""
 
