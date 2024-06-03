@@ -154,5 +154,68 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print("** no instance found **")
 
+    def do_update(self, args):
+        """Updates an instance by its ID"""
+        args_split = args.split(' ')
+        if len(args_split)!= 5:
+            print("** Invalid Syntax: Usage: update <class name> <id> <attribute name> <new value> **")
+            return
+
+        c_name = args_split[0]
+        c_id  = args_split[1]
+        attr_name = args_split[2]
+        attr_val = args_split[3]
+
+        if c_name not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+
+        if not c_id:
+            print("** instance id missing **")
+            return
+
+        if not attr_name:
+            print("** attribute name missing **")
+            return
+
+        if not attr_name:
+            print("** value missing **")
+
+        key = f"{c_name}.{c_id}"
+
+        if key not in storage._FileObject__objects:
+            print("** no instance found **")
+            return
+
+        instance = storage._FileObjects__objects[key]
+        attr_type = type(getattr(instance, attr_name, None))
+
+        if attr_name in ['id', 'created_at', 'updated_at']:
+            return
+
+        try:
+            if isinstance(attr_type, str):
+                value = attr_val.strip('"')
+            elif isinstance(attr_type, float):
+                value = float(attr_val)
+            elif isinstance(attr_type, int):
+                value = int(attr_val)
+            else:
+                raise ValueError
+        except ValueError:
+            print("** value missing **")
+            return
+
+        obj = storage._FileStorage__objects[key]
+
+        storage.update(obj, attr_name, value)
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
