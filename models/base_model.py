@@ -32,7 +32,11 @@ class BaseModel:
             models.storage.new(self)
 
     def save(self):
-        """sets updated_at attribute to current time"""
+        """sets updated_at attribute to current time
+
+        also updates json objects list
+        """
+
         self.updated_at = datetime.now()
         models.storage.save()
 
@@ -42,6 +46,7 @@ class BaseModel:
         Returns:
             all BaseModel attributes and class name as dictionary
         """
+
         attr_dict = {}
 
         # first adds class name to dictionary
@@ -49,11 +54,11 @@ class BaseModel:
 
         # adds all other attributes
         # created_at/updated_at values converted to isoformat here
-        for attr, attr_value in self.__dict__.items():
-            if attr == "created_at" or attr == "updated_at":
-                attr_dict.update({attr : attr_value.isoformat()})
+        for key, value in self.__dict__.items():
+            if key == "created_at" or key == "updated_at":
+                attr_dict.update({key : value.isoformat()})
             else:
-                attr_dict.update({attr : attr_value})
+                attr_dict.update({key : value})
         # attr_dict = {attr: getattr(self, attr) for attr in self.__dict__}
         return attr_dict
 

@@ -2,7 +2,7 @@
 """This is the console command"""
 import sys, cmd
 from models.base_model import BaseModel
-from models.__init__ import storage
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -34,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, args):
-        """ A Doozy"""
+        """creates new instance of class"""
         if not args:
             print("** class name missing **")
             return
