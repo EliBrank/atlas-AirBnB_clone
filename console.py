@@ -8,6 +8,9 @@ from models import storage
 class HBNBCommand(cmd.Cmd):
     """Command or Console"""
     prompt = '(hbnb) '
+    classes = {
+        'BaseModel' : BaseModel
+    }
 
     def preloop(self):
         """Prints if isatty is false"""
@@ -33,6 +36,12 @@ class HBNBCommand(cmd.Cmd):
         """Does nothing"""
         pass
 
+    def do_all(self, args):
+        if class_name not in HBNBCommand.classes:
+            print("** class name doesnt exist **")
+
+
+
     def do_create(self, args):
         """creates new instance of class"""
         if not args:
@@ -42,7 +51,7 @@ class HBNBCommand(cmd.Cmd):
         args_len = args.split()
         class_name = args_len[0]
         #is class in HBNBcommand?
-        if class_name not in HBNBCommand:
+        if class_name not in HBNBCommand.classes:
             print("** Class doesnt exist **")
             return
 
@@ -51,19 +60,23 @@ class HBNBCommand(cmd.Cmd):
         attributes = {}
         #Searsch through the list of arguements
         for arg in args_len:
-            key, value = arg.split("=")
+            arg_toks = arg.split("=")
             #Unquote, underscore to space
+            if len(args_len) != 2:
+                continue
+            key, value = arg_toks[0], arg_toks[1]
+            #convert values to appropriate data types
             if value.startswith('"') and value.endswith('"'):
-                value = value[1:-1].replace('_',' ')
-                #convert values to appropriate data types
+                value = value[1:-1].replace('_', ' ')
+            try:
+                value = float(value)
+            except ValueError:
+                pass
                 try:
-                    value = float(value)
+                    value = int(value)
                 except ValueError:
-                    try:
-                        value = int(value)
-                    except ValueError:
                         pass
-                attributes[key] = value
+            attributes[key] = value
 
         new_instance = HBNBCommand.classes[class_name](**attributes)
 
