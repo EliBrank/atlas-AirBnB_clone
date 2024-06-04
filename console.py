@@ -98,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
             # key/value pairs split and saved into arg_toks list
             arg_toks = arg.split("=")
 
-            #Unquote, underscore to space
+            # Unquote, underscore to space
             if len(args_list) != 2:
                 continue
             key, value = arg_toks[0], arg_toks[1]
