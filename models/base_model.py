@@ -50,15 +50,15 @@ class BaseModel:
         attr_dict = {}
 
         # first adds class name to dictionary
-        attr_dict.update({'__class__' : self.__class__.__name__})
+        attr_dict.update({'__class__': self.__class__.__name__})
 
         # adds all other attributes
         # created_at/updated_at values converted to isoformat here
         for key, value in self.__dict__.items():
             if key == "created_at" or key == "updated_at":
-                attr_dict.update({key : value.isoformat()})
+                attr_dict.update({key: value.isoformat()})
             else:
-                attr_dict.update({key : value})
+                attr_dict.update({key: value})
 
         return attr_dict
 
