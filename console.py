@@ -211,7 +211,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        class_id  = args_list[1]
+        class_id = args_list[1]
 
         key = f"{class_name}.{class_id}"
 
