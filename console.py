@@ -2,7 +2,9 @@
 
 """This is the console command"""
 
-import sys, cmd, models
+import sys
+import cmd
+import models
 from models import storage
 
 
@@ -66,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
         # only adds objs from specified class
         for key, value in obj_dict.items():
             if class_name in key:
-               print_list.append(str(value))
+                print_list.append(str(value))
             for item in print_list:
                 print(item)
 
@@ -108,10 +110,10 @@ class HBNBCommand(cmd.Cmd):
                 value = float(value)
             except ValueError:
                 pass
-                try:
-                    value = int(value)
-                except ValueError:
-                        pass
+            try:
+                value = int(value)
+            except ValueError:
+                pass
             attributes[key] = value
 
         new_instance = models.class_dict[class_name](**attributes)
@@ -230,9 +232,9 @@ class HBNBCommand(cmd.Cmd):
         if attr_name in ['id', 'created_at', 'updated_at']:
             return
 
-        # Updates an instance based on the class name and id by adding 
+        # Updates an instance based on the class name and id by adding
         # or updating attribute (save the change into the JSON file).
-        # Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com". 
+        # Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com".
         #
         # update <class name> <id> <attribute name> "<attribute value>"
 
@@ -249,6 +251,7 @@ class HBNBCommand(cmd.Cmd):
 
         setattr(instance, attr_name, attr_val)
         instance.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
