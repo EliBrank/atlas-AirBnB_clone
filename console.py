@@ -34,8 +34,13 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_all(self, args):
+        """prints string representation of all instances of class
+
+        if no class name passed, print string representation of all classes
+        """
+
         print_list = []
-        class_name = args.split(' ')[0] if ' ' in args else args
+        class_name = args.split()[0] if ' ' in args else args
 
         if class_name not in models.class_dict:
             print("** class name doesn't exist **")
