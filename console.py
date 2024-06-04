@@ -184,11 +184,10 @@ class HBNBCommand(cmd.Cmd):
             return
 
         args_list = args.split()
-
-        print(len(args_list))
+        arg_len = len(args_list)
 
         # make sure args (input) includes all parameters
-        match len(args_list):
+        match arg_len:
             case 0:
                 print("** class name missing **")
                 return
