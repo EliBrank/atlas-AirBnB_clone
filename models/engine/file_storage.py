@@ -40,10 +40,13 @@ class FileStorage():
 
         if exists(self.__file_path):
             with open(self.__file_path, "r") as f:
+                # converts JSON file back into python dictionary
                 obj_dict = json.load(f)
                 for key, value in obj_dict.items():
-                    # separate class name from key
+                    # get class name from key
                     class_name = key.split(".")[0]
+                    # converts dictionaries back into objects
+                    # based on class names
                     if class_name in models.class_dict:
                         class_name = models.class_dict[class_name]
                         self.__objects[key] = class_name(**value)
