@@ -13,5 +13,12 @@ class BaseModel(unittest.TestCase):
 
         self.assertNotEqual(self.b1.created_at, self.b1.updated_at)
 
+    def test_to_dict(self):
+        dict_repr = self.b1.to_dict()
+
+        #Check if created returned dict contains all attributes
+        self.assertIsInstance(dict_repr,dict)
+
+
 if __name__ == '__main__':
     unittest.main()
