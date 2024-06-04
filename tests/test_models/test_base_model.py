@@ -18,6 +18,7 @@ class BaseModel(unittest.TestCase):
 
         #Check if created returned dict contains all attributes
         self.assertIsInstance(dict_repr,dict)
+        self.assertEqual(dict_repr['__class__'], 'BaseModel')
 
 
 if __name__ == '__main__':
