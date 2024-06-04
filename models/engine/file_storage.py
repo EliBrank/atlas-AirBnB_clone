@@ -23,7 +23,7 @@ class FileStorage():
             obj: python object to add to dictionary
         """
 
-        self.__objects.update({f"{obj.__class__.__name__}.{obj.id}" : obj})
+        self.__objects.update({f"{obj.__class__.__name__}.{obj.id}": obj})
 
     def save(self):
         """saves each object in __objects to JSON file"""
@@ -31,7 +31,7 @@ class FileStorage():
         obj_dict = {}
         with open(self.__file_path, "w") as f:
             for key, value in self.__objects.items():
-                obj_dict.update({f"{key}" : value.to_dict()})
+                obj_dict.update({f"{key}": value.to_dict()})
 
             f.write(json.dumps(obj_dict))
 
