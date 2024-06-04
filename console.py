@@ -3,11 +3,28 @@
 import sys, cmd, models
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
+from models.city import City
+from models.state import State
+from models.place import Place
+from models.review import Review
+from models.amenity import Amenity
 
 
 class HBNBCommand(cmd.Cmd):
     """Command or Console"""
     prompt = '(hbnb) '
+
+    class_dict = {
+    "BaseModel" : BaseModel,
+    "User" : User,
+    "City" : City,
+    "State" : State,
+    "Place" : Place,
+    "Review" : Review,
+    "Amenity" : Amenity,
+}
+
 
     def preloop(self):
         """Prints if isatty is false"""
@@ -50,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
             if class_name in key:
                print_list.append(str(value))
 
-            if not print_list:
+            if print_list is None:
                 print("** class doesn't exist **")
                 return
 
@@ -158,6 +175,61 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
         except KeyError:
             print("** no instance found **")
+
+    def do_update(self, args):
+        """Updates an instance by its ID"""
+        if not args:
+            print("** class name missing **")
+            return
+
+
+        args_split = args.split(' ')
+        c_name = args_split[0]
+
+        if c_name not in models.class_dict:
+            print("** class doesn't exist **")
+            return
+
+        if len(args_split)< 2:
+            print("** instance id missing **")
+            return
+
+        c_id  = args_split[1]
+
+        key = f"{c_name}.{c_id}"
+
+        if key not in storage.all():
+            print("** no instance found **")
+            return
+
+        if len(args_split) < 3:
+            print("** attribute name missing **")
+            return
+
+        attr_name = args_split[2]
+
+        if len(args_split) < 4:
+            print("** value missing **")
+            return
+
+        attr_val = args_split[3]
+
+        instance = storage._FileStorage__objects[key]
+        attr_type = type(getattr(instance, attr_name, None))
+
+        if attr_name in ['id', 'created_at', 'updated_at']:
+            return
+
+        try:
+            if "." in attr_val:  # This could be a float
+                value = float(attr_val)
+            else:
+                value = int(attr_val)
+        except ValueError:
+            value = attr_val  # Just a string
+
+        #  `key` is your unique identifier for the object
+        obj = storage._FileStorage__objects[key]
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
