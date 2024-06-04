@@ -184,22 +184,20 @@ class HBNBCommand(cmd.Cmd):
             return
 
         args_list = args.split()
-        arg_len = len(args_list)
 
         # make sure args (input) includes all parameters
-        match arg_len:
-            case 0:
-                print("** class name missing **")
-                return
-            case 1:
-                print("** instance id missing **")
-                return
-            case 2:
-                print("** attribute name missing **")
-                return
-            case 3:
-                print("** value missing **")
-                return
+        if len(args_list) == 0:
+            print("** class name missing **")
+            return
+        elif len(args_list) == 1:
+            print("** instance id missing **")
+            return
+        elif len(args_list) == 2:
+            print("** attribute name missing **")
+            return
+        elif len(args_list) == 3:
+            print("** value missing **")
+            return
 
         # ensures list of arguments is 4 (args after 4 discarded)
         while (len(args_list) > 4):
