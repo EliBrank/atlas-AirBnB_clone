@@ -12,28 +12,17 @@ class HBNBCommand(cmd.Cmd):
     """Command or Console"""
     prompt = '(hbnb) '
 
-    def preloop(self):
-        """prints if isatty is false"""
-        if not sys.__stdin__.isatty():
-            print('(hbnb)')
+    def do_quit(self, args):
+        """exits the console"""
+        return True
 
-    def postcmd(self, stop, line):
-        """prints if isatty is false"""
-        if not sys.__stdin__.isatty():
-            print('(hbnb) ', end='')
-        return stop
-
-    def do_quit(self, command):
-        """quits console"""
-        exit()
-
-    def do_EOF(self, arg):
-        """handles EOF to exit prog"""
-        exit()
+    def do_EOF(self, args):
+        """'End of File' - exits the console"""
+        return True
 
     def emptyline(self):
         """does nothing"""
-        pass
+        return False
 
     def do_all(self, args):
         """prints string representation of all instances of class
@@ -73,7 +62,11 @@ class HBNBCommand(cmd.Cmd):
                 print(item)
 
     def do_create(self, args):
-        """creates new instance of class"""
+        """creates new instance of class
+
+        additional attributes can be provided as key/value pairs
+        """
+
         if not args:
             print("** class name missing **")
             return
@@ -87,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        # class name taken care of
+        # since class name is taken care of
         # now evaluate remaining args from input
         args_list = args_list[1:]
 
@@ -125,7 +118,11 @@ class HBNBCommand(cmd.Cmd):
         print(new_instance.id)
 
     def do_show(self, args):
-        """Display"""
+        """displays string representation of specified object
+
+        requires class name and id as input arguments
+        """
+
         new = args.partition(" ")
         c_name = new[0]
         c_id = new[2]
@@ -147,12 +144,16 @@ class HBNBCommand(cmd.Cmd):
         key = f"{c_name}.{c_id}"
 
         try:
-            print(storage._FileStorage__objects[key])
+            print(storage.all()[key])
         except KeyError:
             print("** no instance found **")
 
     def do_destroy(self, args):
-        """destroys a specified object"""
+        """destroys a specified object
+
+        requires class name and id as input arguments
+        """
+
         new = args.partition(" ")
         c_name = new[0]
         c_id = new[2]
@@ -180,7 +181,12 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_update(self, args):
-        """updates an instance by its ID"""
+        """updates an object with a given attribute
+
+        requires class name and id as input arguments
+        only one attribute can be updated at a time
+        """
+
         if not args:
             print("** class name missing **")
             return
@@ -226,21 +232,13 @@ class HBNBCommand(cmd.Cmd):
         # gets dictionary representation of object
         instance = obj_dict[key]
 
-        # attr_type = type(getattr(instance, attr_name, None))
-
         # attempts to update below attributes will fail
         if attr_name in ['id', 'created_at', 'updated_at']:
             return
 
-        # Updates an instance based on the class name and id by adding
-        # or updating attribute (save the change into the JSON file).
-        # Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com".
-        #
-        # update <class name> <id> <attribute name> "<attribute value>"
-
         # cast attr_val to appropriate data type
         try:
-            # checks if attr_val is a float if it has decimal point
+            # checks if attr_val is a float (if it has decimal point)
             if "." in attr_val:
                 attr_val = float(attr_val)
             else:
@@ -251,7 +249,6 @@ class HBNBCommand(cmd.Cmd):
 
         setattr(instance, attr_name, attr_val)
         instance.save()
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
