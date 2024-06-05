@@ -30,12 +30,13 @@ Here are a few more console command examples:
     (2024, 6, 4, 21, 38, 48, 23012), 'updated_at': datetime.datetime(2024, 6, 4, 21, 38, 48, 23012)}
     [User] (b8ecb68a-9270-401d-b99f-d64c98d56119) {'id': 'b8ecb68a-9270-401d-b99f-d64c98d56119', 'created_at': datetime.datetime(2024
     , 6, 4, 21, 40, 50, 648189), 'updated_at': datetime.datetime(2024, 6, 4, 21, 40, 50, 648189)}
+
+Above, we create another object—an instance of the class `User`—and use the command `all` to display a special dictionary representation of our objects.
+
     (hbnb) destroy BaseModel 99060db5-e4f2-4668-a585-9b94bf00abbf
     (hbnb) all
     [User] (b8ecb68a-9270-401d-b99f-d64c98d56119) {'id': 'b8ecb68a-9270-401d-b99f-d64c98d56119', 'created_at': datetime.datetime(2024
     , 6, 4, 21, 40, 50, 648189), 'updated_at': datetime.datetime(2024, 6, 4, 21, 40, 50, 648189)}
-
-Above, we create another object—an instance of the class `User`—and use the command `all` to display a special dictionary representation of our objects.  
 
 We then use the command `destroy` and target the `BaseModel` object we created earlier by specifying its unique ID.
 Finally we use the `all` command once more to show that the `BaseModel` object was removed and now only our `User` object remains.
