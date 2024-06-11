@@ -1,12 +1,25 @@
+.container {
+  max-width: 1000px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 .container .filters {
   background-color: white;
   height: 70px;
   width: 100%;
   border: 1px solid #DDDDDD;
   border-radius: 4px;
+  align-content: center;
 }
 
 .filters button {
+  margin: auto;
+  float: right;
+  position: relative;
   font-size: 18px;
   background-color: #FF5A5F;
   color: #FFFFFF;
