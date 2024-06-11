@@ -3,15 +3,15 @@ header {
   height: 70px;
   width: 100%;
   border-bottom: 1px solid #CCCCCC;
+  align-items: center;
+  display: flex;
 }
 
 .header-logo {
-  margin: 0;
-  padding: 0;
+  position: relative;
   background-image: url("../images/logo.png");
   background-size: contain;
   background-repeat: no-repeat;
-  vertical-align: middle;
   left: 20px;
   width: 142px;
   height: 60px;
