@@ -1,0 +1,45 @@
+.container {
+    background-color: white;
+    height: 70px;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative; /* Ensure the container's child elements are positioned relatively */
+}
+
+.box1, .box2 {
+    height: 100%;
+    width: 25%;
+    margin-left: 2rem;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative; /* Needed for absolute positioning of sub-boxes */
+    flex-basis: 25%;
+}
+
+.box1_sub, .box2_sub {
+    display: none; /* Hide sub-boxes initially */
+    width: 100%; /* Ensure sub-boxes are the same width as the parent box */
+    background-color: lightgreen; /* Optional background for better visualization */
+    padding: 10px; /* Optional padding for better visualization */
+    position: absolute; /* Position sub-boxes absolutely */
+    top: 100%; /* Position below the parent box */
+    left: 0; /* Align with the left edge of the parent box */
+}
+
+.box1:hover .box1_sub, .box2:hover .box2_sub {
+    display: block; /* Show sub-boxes on hover */
+}
+
+.right-button {
+    flex: 0 0 auto;
+    margin-left: auto;
+    background-color: lightcoral; /* Optional background for better visualization */
+    padding: 10px; /* Optional padding for better visualization */
+}
